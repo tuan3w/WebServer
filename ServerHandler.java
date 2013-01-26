@@ -1,3 +1,5 @@
+
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -10,10 +12,17 @@ import java.net.Socket;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-
+/**
+ * ServerHandle Class
+ */
 class ServerHandler extends Thread{
 	private String root;
 	private Socket sock;
+	/**
+	 * ServerHandler
+	 * @param root {String} root path
+	 * @param sock {Socket} Server Socket response
+	 */
 	public ServerHandler(String root, Socket sock) {
 		this.root = root;
 		this.sock = sock;
@@ -21,9 +30,11 @@ class ServerHandler extends Thread{
 	@Override
 	public void run() {
 		File f = new File(root);
+		//root must be a path of a director
 		if (!f.isDirectory()){
 			throw new IllegalArgumentException("Invalid root path- must be directry");
 		}
+		//root must be can be read
 		if (!f.canRead() ){
 			try {
 				throw new Exception(" Could not read directory");
